@@ -11,6 +11,7 @@ import jakarta.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 import jpabook.jpashop.domain.Category;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,4 +32,22 @@ public abstract class Item {
 
     @ManyToMany(mappedBy = "items") //매핑된 상대 설정
     private List<Category> categoryies = new ArrayList<>();
+
+    //비즈니스 로직 : 도메인 주도 설계로 비즈니스로직을 엔티티안에 작성하는게 객체지향적 개발
+
+    // 재고수량 증가
+    public void addStock(int quantity) {
+        this.stockQuantity += quantity;
+    }
+
+    // 재고수량 감소
+    public void removeStock(int quantity) {
+        //0보다작으면 안되니 체크
+        int restStock = this.stockQuantity - quantity;
+
+        if(restStock < 0) {
+            throw new NotEnoughStockException("need more stock");
+        }
+        this.stockQuantity = restStock;
+    }
 }
