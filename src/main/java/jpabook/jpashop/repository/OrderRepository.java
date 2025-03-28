@@ -33,7 +33,9 @@ public class OrderRepository {
         return em.find(Order.class, id);
     }
 
-    //검색 : JPA 동적쿼리 기능 JPQL 별도 공부필요..., 실무에서는 로직이 유지보수힘들게 복잡하여 권장하지 않음
+    //검색 : JPA 동적쿼리 기능 QUERYDSL 별도공부필요
+    // 실무에서는 로직이 유지보수힘들게 복잡하여 권장하지 않음
+    // 아래 복잡한 문자열 포함 동적쿼리 로직을 커버하기위해 나온게 QUERYDSL
     public List<Order> findAll(OrderSearch orderSearch) {
         String jpql = "select o From Order o join o.member m";
         boolean isFirstCondition = true;
