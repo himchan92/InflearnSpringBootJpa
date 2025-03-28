@@ -14,6 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
     - junit 테스트 라이브러리
     - Mock, AssertJ 지원
 
+    starter-jpa
+    - jpa, db 등 설정 지원
+
     devtools
     - 서버 재기동없이 view 수정 후 refresh 하면 바로 반영 지원
  */
