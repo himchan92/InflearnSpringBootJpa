@@ -34,6 +34,7 @@ public class ItemController {
         book.setAuthor(form.getAuthor());
         book.setIsbn(form.getIsbn());
 
+        // setter 시 변경감지 or merge(병합) 방식으로 JPA가 update 수행지원
         itemService.saveItem(book);
         return "redirect:/";
     }
@@ -65,16 +66,10 @@ public class ItemController {
     }
 
     @PostMapping("items/{itemId}/edit")
-    public String updateItem(@PathVariable String itemId, @ModelAttribute("form") BookForm form) {
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
-
-        itemService.saveItem(book);
+    public String updateItem(@PathVariable Long itemId, @ModelAttribute("form") BookForm form) {
+        // 컨트롤러말고 서비스단 @Transactional 안에서 조회, setter로 변경감지 처리해야 유지보수 용이
+        // 만약, 업데이트대상 데이터가 많아 파라미터가 많을경우 별도 DTO객체를 만든 후 파라미터로 넘기는걸 권장
+        itemService.updateItem(itemId, form.getName(), form.getPrice(), form.getStockQuantity());
 
         return "redirect:/items";
     }
