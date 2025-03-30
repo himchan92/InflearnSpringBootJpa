@@ -47,4 +47,12 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        //변경대상 id 기준 조회 후 setter 하여 name 값 변경
+        //Transactional 안에서 setter로 인한 변경 시 Transactional가 변경감지 체크
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
