@@ -26,7 +26,6 @@ import org.aspectj.weaver.ast.Or;
 @Table(name = "orders")
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PROTECTED) //생성자 범위 설정지원
 public class Order {
 
     @Id
@@ -41,7 +40,7 @@ public class Order {
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //cascade : 저장 시 참조관계로 같이 저장설정
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
 
