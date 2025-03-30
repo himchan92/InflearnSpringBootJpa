@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
@@ -29,6 +30,7 @@ public class Member {
     @Embedded
     private Address address;
 
+    @JsonIgnore // API JSON 결과에서 제외: 안할 시 무조건 노출되기에 불필요한것 셋팅
     @OneToMany(mappedBy = "member") //Order 도메인 > Member 매핑
     private List<Order> orders = new ArrayList<>();
 }
