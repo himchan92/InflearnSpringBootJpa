@@ -30,7 +30,7 @@ public class Member {
     @Embedded
     private Address address;
 
-    @JsonIgnore // API JSON 결과에서 제외: 안할 시 무조건 노출되기에 불필요한것 셋팅
+    @JsonIgnore // API JSON 결과에서 제외: 안할 시 무조건 노출되기에 불필요한것 셋팅, 양뱡향 연관관계 서로참조로 무한루프 방지
     @OneToMany(mappedBy = "member") //Order 도메인 > Member 매핑
     private List<Order> orders = new ArrayList<>();
 }

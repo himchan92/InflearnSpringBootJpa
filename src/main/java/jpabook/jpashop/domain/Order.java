@@ -26,6 +26,7 @@ import org.aspectj.weaver.ast.Or;
 @Table(name = "orders")
 @Getter
 @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
     @Id
@@ -33,7 +34,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) //지연로딩 = DB에서 데이터 바로 안가져옴
     @JoinColumn(name = "member_id") // 조인할 컬럼 설정(FK: member_id)
     private Member member;
 

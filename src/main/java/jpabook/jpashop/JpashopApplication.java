@@ -1,7 +1,9 @@
 package jpabook.jpashop;
 
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
 
 /*
     spring-boot-starter-web
@@ -37,4 +39,9 @@ public class JpashopApplication {
         SpringApplication.run(JpashopApplication.class, args);
     }
 
+    // 아래 Hibernate5Module보다 DTO로 변환해서 반환하는게 실무에서 권장!!
+//    @Bean
+//    Hibernate5Module hibernate5Module() {
+//        return new Hibernate5Module();
+//    }
 }
