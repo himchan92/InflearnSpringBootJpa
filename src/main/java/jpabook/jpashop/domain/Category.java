@@ -46,4 +46,10 @@ public class Category {
 
     @OneToMany(mappedBy = "parent")
     private List<Category> child = new ArrayList<>();
+
+    //부모-자식 양방향 연관관계 편의메소드
+    public void addChildCatetory(Category child) {
+        this.child.add(child);
+        child.setParent(this);
+    }
 }

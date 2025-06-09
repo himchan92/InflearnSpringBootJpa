@@ -5,8 +5,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * JPA 설계 원칙
- * - 모든 연관관계는 지연로딩(LAZY) 설정
+ * - 모든 연관관계는 지연로딩(LAZY) 설정(단, OneToMany는 기본 LAZY라 제외)
  * - setter 금지 : 값 변경을 사전에 막고 생성자초기화때만 설정
+ * - 컬렉션은 필드에서 초기화 하는게 안전
  */
 @SpringBootApplication
 public class JpashopApplication {
