@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import org.aspectj.weaver.ast.Or;
 
 @Entity
 @Table(name = "orders")
@@ -53,5 +54,48 @@ public class Order {
     public void setDelivery(Delivery delivery) {
         this.delivery = delivery;
         delivery.setOrder(this);
+    }
+
+    //주문생성
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+        Order order = new Order();
+        order.setMember(member);
+        order.setDelivery(delivery);
+
+        for(OrderItem orderItem : orderItems) {
+            order.addOrderItem(orderItem);
+        }
+        order.setStatus(OrderStatus.ORDER);
+        order.setOrderDate(LocalDateTime.now());
+
+        return order;
+    }
+
+    //주문취소
+    public void cancel() {
+        if(delivery.getStatus() == DeliveryStatus.COMP) {
+            //배송완료면 취소 불가
+            throw new IllegalStateException("이미 배송완료된건 취소가 불가합니다.");
+        }
+        this.setStatus(OrderStatus.CANCEL);
+
+        for(OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
+    //전체주문가격조회
+    public int getTotalPrice() {
+        int totalPrice = 0;
+
+        for(OrderItem orderItem : orderItems) {
+            totalPrice += orderItem.getTotalPrice();
+        }
+
+        return totalPrice;
+
+        //자바8 스트림방식
+//        return orderItems.stream()
+//            .mapToInt(OrderItem::getTotalPrice).sum();
     }
 }
