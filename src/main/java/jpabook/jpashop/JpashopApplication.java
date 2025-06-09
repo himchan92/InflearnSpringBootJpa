@@ -11,6 +11,8 @@ public class JpashopApplication {
 //        hello.setData("hello");
 //        String data = hello.getData();
 //        System.out.println("data = " + data);
+
+        //스프링부트 : 내장톰캣으로 별도설치/셋팅없이 바로 실행가능, Gradle 통해 라이브러리 자동 설정
         SpringApplication.run(JpashopApplication.class, args);
     }
 
