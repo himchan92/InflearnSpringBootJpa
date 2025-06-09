@@ -3,6 +3,11 @@ package jpabook.jpashop;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * JPA 설계 원칙
+ * - 모든 연관관계는 지연로딩(LAZY) 설정
+ * - setter 금지 : 값 변경을 사전에 막고 생성자초기화때만 설정
+ */
 @SpringBootApplication
 public class JpashopApplication {
 
