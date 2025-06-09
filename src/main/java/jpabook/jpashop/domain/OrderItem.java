@@ -4,11 +4,14 @@ import static jakarta.persistence.FetchType.LAZY;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.item.Item;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED) //protected 범위 기본생성자 지원
 public class OrderItem {
 
     @Id
