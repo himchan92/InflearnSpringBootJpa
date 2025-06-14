@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
@@ -21,8 +22,10 @@ public class Member {
     private String name;
 
     @Embedded
+    @JsonIgnore
     private Address address;
 
+    @JsonIgnore //API 호출결과에서 제외 : 불필요한 내용 정리위함
     @OneToMany(mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 }
