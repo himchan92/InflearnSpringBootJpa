@@ -30,6 +30,7 @@ public class Order {
   @JoinColumn(name = "member_id")
   private Member member;
 
+  //JPQL 실행 시 N+1 문제우려로 반드시 지연로딩으로 모든ManyToOne, OneToMany 양방향 연관관계들을 설정
   @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
   private List<OrderItem> orderItems = new ArrayList<>();
 
