@@ -30,4 +30,25 @@ public class OrderItem {
 
   private int orderPrice; //주문가격
   private int count; //주문수량
+
+  //생성메소드
+  public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+    OrderItem orderItem = new OrderItem();
+    orderItem.setItem(item);
+    orderItem.setOrderPrice(orderPrice);
+    orderItem.setCount(count);
+
+    //생성 후 기존재고수량 감소
+    item.removeStock(count);
+    return orderItem;
+  }
+
+  //주문취소 비즈니스로직
+  public void cancel() {
+    getItem().addStock(count); //취소 시 해당 수량만큼 원복
+  }
+
+  public int getTotalPrice() {
+    return getTotalPrice() * getCount();
+  }
 }
