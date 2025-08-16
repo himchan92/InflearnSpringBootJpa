@@ -15,11 +15,11 @@ import lombok.Setter;
 
 @Entity
 @Getter
-@Setter
+@Setter //실습 이해를 위해 임시작성한거지 실무에서는 금지!!
 public class Member {
 
   @Id @GeneratedValue
-  @Column(name = "member_id")
+  @Column(name = "member_id") //엔티티명_id로 Pk 만들어야 쉽게 알아보기에 권장
   private Long id;
 
   private String name;
