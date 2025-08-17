@@ -1,6 +1,7 @@
 package jpabook.jpashop.service;
 
 import java.util.List;
+import jpabook.jpashop.domain.item.Book;
 import jpabook.jpashop.domain.item.Item;
 import jpabook.jpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,18 @@ public class ItemService {
   @Transactional //변경관련이기에 별도 트랜젝션 설정
   public void saveItem(Item item) {
     itemRepository.save(item);
+  }
+
+  @Transactional
+  public Item updateItem(Long itemId, String name, int price, int stockQuantity) {
+    Item findItem = itemRepository.findOne(itemId);
+    //findItem.change(name, price, stockQuantity) ; -> 아래처럼 나열말고 별도 setter 처리 메소드화 하는 로직 권장(feat. 강사님)
+    findItem.setName(name);
+    findItem.setPrice(price);
+    findItem.setStockQuantity(stockQuantity);
+    //save 없이 setter + transactional 효과로 변경감지 일어나 update 수행지원
+
+    return findItem;
   }
 
   //조회는 클래스전체 readonly = true 트랜젝션 어노테이션 적용받음
