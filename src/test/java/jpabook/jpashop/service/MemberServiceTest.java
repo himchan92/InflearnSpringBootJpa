@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jakarta.persistence.EntityManager;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,8 @@ class MemberServiceTest {
     MemberService memberService;
     @Autowired
     MemberRepository memberRepository;
+    @Autowired
+    EntityManager em;
 
     @Test
     public void 회원가입() throws Exception {
@@ -27,11 +30,7 @@ class MemberServiceTest {
         Long savedId = memberService.join(member);
 
         //then
+        em.flush();
         assertEquals(member, memberRepository.findOne(savedId));
-    }
-
-    @Test
-    public void 중복회원예외() throws Exception {
-
     }
 }
