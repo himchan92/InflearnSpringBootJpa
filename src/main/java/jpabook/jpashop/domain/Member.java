@@ -20,6 +20,8 @@ public class Member {
     @Embedded //내장타입명시
     private Address address;
 
-    @OneToMany(mappedBy = "member")
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
+
+    //컬렉션은 필드에서 초기화하는게 안전
 }
