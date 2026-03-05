@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter @Setter
+@Getter @Setter //실무에서는 변경지점명확하게 setter 아닌 별도 비즈니스메소드 처리 권장
 public class Member {
 
     @Id @GeneratedValue
