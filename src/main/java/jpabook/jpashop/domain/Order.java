@@ -19,7 +19,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY) //기본 즉시로딩으로 참조안해도 다가져와 성능저하(N+1)되니 LAZY로 설정필수
     @JoinColumn(name = "member_id")
     private Member member;
 
