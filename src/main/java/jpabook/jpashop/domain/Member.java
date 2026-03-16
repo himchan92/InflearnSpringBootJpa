@@ -22,11 +22,11 @@ public class Member {
     @NotEmpty
     private String name;
 
-    @JsonIgnore
     @Embedded
     private Address address;
 
     //mappedBy: 상대방 매핑되있는것 명시하고 읽기전용
+    @JsonIgnore //연관관계 반대쪽 설정하여 순환참조 방지
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
     private List<Order> orders = new ArrayList<>();
 }
