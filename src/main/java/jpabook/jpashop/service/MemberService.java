@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jakarta.validation.constraints.NotEmpty;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,11 @@ public class MemberService {
     @Transactional(readOnly = true)
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
+    }
+
+    @Transactional
+    public void update(Long id, @NotEmpty String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
     }
 }
